@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: 'forms',
+        path: 'apply',
         element: <Forms />,
       },
       {

@@ -1,24 +1,20 @@
 // Forms.tsx
-import React, { useState } from 'react';
-import './Apply.css';
+import React from 'react';
 import InitialApplicationForm from '../../components/InitialForm/InitialApplicationForm';
-import MultiStepForm from '../../components/MultiStepForm/MultiStepForm';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Forms: React.FC = () => {
-  const [showMainForm] = useState(false);
   const navigate = useNavigate();
 
   return (
     <>
-      <div className="forms-header">
-        <h1>Loan Application Form</h1>
-        <p>Please fill in all required fields to proceed.</p>
+      <div className="text-center mb-12 sm:mb-8 py-8 px-8 sm:py-6 sm:px-4 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl text-white shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_10px_10px_-5px_rgba(0,0,0,0.04)]">
+        <h1 className="text-white mb-3 text-4xl sm:text-3xl sm:text-[1.75rem]">Loan Application Form</h1>
+        <p className="text-white/95 text-lg sm:text-base">Please fill in all required fields to proceed.</p>
       </div>
 
-      {!showMainForm && (
-        <div className="loans-page">
+        <div className="w-full max-w-[1000px] mx-auto sm:px-2">
           <InitialApplicationForm
             onSuccess={async (data) => {
               console.log('Success:', data);
@@ -59,9 +55,7 @@ const Forms: React.FC = () => {
                 );
 
                 console.log("API Success:", response.data);
-
-                // 3. Show next form section
-                // setShowMainForm(true);
+                navigate('/thank-you');
                 window.scrollTo({ top: 0, behavior: "smooth" });
 
               } catch (error: any) {
@@ -74,22 +68,13 @@ const Forms: React.FC = () => {
                 }
               }
 
-              // setShowMainForm(true);
 
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
           />
         </div>
-      )}
-      {showMainForm && (
-        <div>
-          <MultiStepForm onSuccess={async (data) => {
-            console.log("MultiStepForm submitted successfully:", data);
-            alert("MultiStepForm submitted successfully:");
-            navigate('/thank-you');
-          }} />
-        </div>
-      )}
+
+
     </>
   );
 };
